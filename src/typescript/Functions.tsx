@@ -1,15 +1,15 @@
 export const Functions = () => {
 
-    // Incorrect for TypeScript, correct for JavaScript: a and b are of type any.
-    
-    const sum = (a, b) => {
+    // TypeScript Function.
+
+    const sum = (a: number, b: number): number => {
         return a + b;
     }
 
   return (
     <>
         <h3>Functions</h3>
-        <span>Sum result is: {sum(3, 4)}</span>
+        <span>Sum result is: {sum(3, 8)}</span>
     </>
   )
 }
