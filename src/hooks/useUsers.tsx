@@ -24,17 +24,28 @@ export const useUsers = () => {
         })
         if(response.data.data.length > 0){
             setUsers(response.data.data);
-            pageNumber.current++;
-            console.log(pageNumber.current)
         }else{
-            alert('No more records');
+            pageNumber.current--;
         }
         
     }
 
+    const nextPage = () => {
+        pageNumber.current ++;
+        loadUsers();
+    }
+
+    const previousPage = () => {
+        if(pageNumber.current > 1){
+            pageNumber.current --;
+            loadUsers();
+        }
+    }
+
     return{
         users,
-        loadUsers
+        nextPage,
+        previousPage,
     }
-    
+
 }

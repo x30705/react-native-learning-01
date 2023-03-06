@@ -3,7 +3,7 @@ import { useUsers } from '../hooks/useUsers';
 
 export const Users = () => {
 
-    const {users, loadUsers} = useUsers();
+    const {users, nextPage, previousPage} = useUsers();
 
     // With {field} you can take only the filds you need.
     const renderItem = ({id, avatar, first_name, email}: User) => {
@@ -45,7 +45,13 @@ export const Users = () => {
                 }
             </tbody>
         </table>
-        <button className='btn btn-primary' onClick={loadUsers}>
+        <button className='btn btn-primary' onClick={previousPage}>
+            Previous
+        </button>
+
+        &nbsp;
+        
+        <button className='btn btn-primary' onClick={nextPage}>
             Next
         </button>
     </>
