@@ -1,17 +1,23 @@
-export interface ReqResList {
+// Paste JSON as Code Extension:
+// https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype
+// Copy JSON
+// Command Pallet (SHIFT + COMMAND + P)
+// Search Command (Paste JSON as Code)
+// Select Languag (TypeScript)
+// Name root element
+// Paste JSON
 
-    // https://app.quicktype.io/
-    // Interfaces Only & Verify JSON.parse at runtime
-    
+export interface ReqResList {
     page:        number;
     per_page:    number;
     total:       number;
     total_pages: number;
-    data:        Datum[];
+    data:        User[];
     support:     Support;
 }
 
-export interface Datum {
+// fn + F2 to rename everywhere in the file.
+export interface User {
     id:         number;
     email:      string;
     first_name: string;
