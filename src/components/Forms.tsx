@@ -1,19 +1,11 @@
-import { useState } from 'react';
+import { useForm } from "./useForm"
 
 export const Forms = () => {
 
-    const [form, setForm] = useState({
+    const{form, email, password, onChange} = useForm({
         email: 'test@test.com',
         password: '123456'
-    })
-
-    const onChange = (value: string, field: string) => {
-        setForm({
-            ...form, //To change only the specified fields (setForm alters the entire object)
-            [field]: value //Create a field on the fly dynamically
-        })
-    }
-
+    });
 
     return (
         <>
@@ -22,7 +14,7 @@ export const Forms = () => {
                 type="text"
                 className="form-control"
                 placeholder="Email"
-                value={form.email}
+                value={email}
                 /* target comes from the catched event */
                 onChange={({target}) => onChange(target.value, 'email')}
             />
@@ -31,7 +23,7 @@ export const Forms = () => {
                 type="text"
                 className="form-control mt-2 mb-2"
                 placeholder="Password"
-                value={form.password}
+                value={password}
                 onChange={({target}) => onChange(target.value, 'password')}
             />
 
