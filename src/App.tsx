@@ -4,7 +4,7 @@
 //import { Counter } from "./components/Counter";
 //import { HookCounter } from "./components/HookCounter";
 //import { Login } from "./components/Login";
-import { Users } from "./components/Users";
+import { Forms } from "./components/Forms";
 
 const App = () => {
   return (
@@ -17,7 +17,8 @@ const App = () => {
         {/* <Counter/> */}
         {/* <HookCounter/> */}
         {/* <Login/> */}
-        <Users/> 
+        {/* <Users/> */}
+        <Forms/> 
     </div>
   )
 }
