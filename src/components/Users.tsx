@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { reqResApi } from "../api/reqRes";
 import { ReqResList, User } from '../interfaces/reqResp';
 
@@ -9,14 +9,29 @@ export const Users = () => {
 
     const [users, setUsers] = useState<User[]>([]);
 
+    const pageNumber = useRef(1);
+
     useEffect(() => {
-        reqResApi.get<ReqResList>('/users')
-            .then( response => {
-                setUsers(response.data.data);
-            })
-            // Same as: .catch(error => console.log(error))
-            .catch(console.log);
+        loadUsers();
+        console.log("ONCE")
     }, [])
+
+    // Refactoring using async
+    const loadUsers = async() => {
+        const response = await reqResApi.get<ReqResList>('/users', {
+            params:{
+                page: pageNumber.current
+            }
+        })
+        if(response.data.data.length > 0){
+            setUsers(response.data.data);
+            pageNumber.current++;
+            console.log(pageNumber.current)
+        }else{
+            alert('No more records');
+        }
+        
+    }
 
     // With {field} you can take only the filds you need.
     const renderItem = ({id, avatar, first_name, email}: User) => {
@@ -58,6 +73,9 @@ export const Users = () => {
                 }
             </tbody>
         </table>
+        <button className='btn btn-primary' onClick={loadUsers}>
+            Next
+        </button>
     </>
   )
 }
