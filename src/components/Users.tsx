@@ -1,37 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { reqResApi } from "../api/reqRes";
-import { ReqResList, User } from '../interfaces/reqResp';
+import { User } from '../interfaces/reqResp';
+import { useUsers } from '../hooks/useUsers';
 
 export const Users = () => {
 
-    // REQ|RES API: https://reqres.in/
-    // AXIOS package for making HTTP requests: https://www.npmjs.com/package/axios
-
-    const [users, setUsers] = useState<User[]>([]);
-
-    const pageNumber = useRef(1);
-
-    useEffect(() => {
-        loadUsers();
-        console.log("ONCE")
-    }, [])
-
-    // Refactoring using async
-    const loadUsers = async() => {
-        const response = await reqResApi.get<ReqResList>('/users', {
-            params:{
-                page: pageNumber.current
-            }
-        })
-        if(response.data.data.length > 0){
-            setUsers(response.data.data);
-            pageNumber.current++;
-            console.log(pageNumber.current)
-        }else{
-            alert('No more records');
-        }
-        
-    }
+    const {users, loadUsers} = useUsers();
 
     // With {field} you can take only the filds you need.
     const renderItem = ({id, avatar, first_name, email}: User) => {
